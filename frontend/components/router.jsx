@@ -10,7 +10,7 @@ class AppRouter extends React.Component {
     super(props)
   }
 
-  _ensureLoggedIn() {
+  _ensureLoggedIn(nextState, replace) {
     const currentState = this.props.store.getState();
     const currentUser = currentState.session.currentUser;
     if (!currentUser) {
@@ -18,7 +18,7 @@ class AppRouter extends React.Component {
     }
   }
 
-  _redirectIfLoggedIn() {
+  _redirectIfLoggedIn(nextState, replace) {
     const currentState = this.props.store.getState();
     const currentUser = currentState.session.currentUser;
     if (currentUser) {

@@ -23262,7 +23262,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    items: state.user
+	    errors: state.session.errors
 	  };
 	};
 	
@@ -23351,95 +23351,115 @@
 	        var _this = _possibleConstructorReturn(this, (SessionForm.__proto__ || Object.getPrototypeOf(SessionForm)).call(this, props));
 	
 	        _this.state = {
-	            name: "",
-	            securId: ""
+	            time: 0
 	        };
 	        return _this;
 	    }
 	
 	    _createClass(SessionForm, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            var that = this;
+	            setInterval(function () {
+	                that.setState({ time: _this2.state.time + 1 });
+	            }, 1000);
+	        }
+	    }, {
 	        key: 'submitForm',
 	        value: function submitForm(e) {
 	            e.preventDefault();
 	            var login = (0, _jquery2.default)('#login').val();
 	            var passwd = (0, _jquery2.default)('#passwd').val();
-	            this.props.login({ name: login, securId: passwd });
+	            this.props.login({ name: login, time: this.state.time, securId: passwd });
 	        }
 	    }, {
 	        key: 'formChange',
 	        value: function formChange(field) {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            // debugger;
 	            return function (e) {
-	                _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+	                _this3.setState(_defineProperty({}, field, e.currentTarget.value));
 	            };
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            // debugger;
+	            var style = Array.isArray(this.props.errors) ? { visibility: 'hidden' } : { visibility: 'visible' };
 	            return _react2.default.createElement(
-	                'form',
-	                { method: 'post', onSubmit: this.submitForm.bind(this) },
-	                _react2.default.createElement('div', { className: 'placeholder' }),
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-group input-group-lg space-top space-bottom' },
-	                    _react2.default.createElement('input', { type: 'text', autoComplete: 'off', spellCheck: 'false', className: 'form-control', placeholder: 'Username', id: 'login', name: 'login' }),
+	                    'p',
+	                    { className: 'error', style: style },
+	                    this.props.errors
+	                ),
+	                _react2.default.createElement(
+	                    'form',
+	                    { method: 'post', onSubmit: this.submitForm.bind(this) },
+	                    _react2.default.createElement('div', { className: 'placeholder' }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-icon' },
-	                        _react2.default.createElement('i', { className: 'fa fa-2x fa-user text-primary' })
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-group space-top space-bottom input-group-lg' },
-	                    _react2.default.createElement('input', { type: 'password', autoComplete: 'off', className: 'form-control', placeholder: 'SecurID \xAE (PIN + 6 or 8 digit code)', id: 'passwd', name: 'passwd' }),
+	                        { className: 'input-group input-group-lg space-top space-bottom' },
+	                        _react2.default.createElement('input', { type: 'text', autoComplete: 'off', spellCheck: 'false', className: 'form-control', placeholder: 'Username', id: 'login', name: 'login' }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'input-icon' },
+	                            _react2.default.createElement('i', { className: 'fa fa-2x fa-user text-primary' })
+	                        )
+	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-icon' },
-	                        _react2.default.createElement('i', { className: 'fa fa-2x fa-lock text-primary' })
+	                        { className: 'input-group space-top space-bottom input-group-lg' },
+	                        _react2.default.createElement('input', { type: 'password', autoComplete: 'off', className: 'form-control', placeholder: 'SecurID \xAE (PIN + 6 or 8 digit code)', id: 'passwd', name: 'passwd' }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'input-icon' },
+	                            _react2.default.createElement('i', { className: 'fa fa-2x fa-lock text-primary' })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'region', name: 'region', className: 'form-control space-bottom-lg' },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'americas-login.gs.com', selected: 'selected' },
+	                            'Americas'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'emea-login.gs.com' },
+	                            'Europe, Middle East & Africa'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'apac1-login.gs.com' },
+	                            'Asia Pacific (Hong Kong / Japan)'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'apac2-login.gs.com' },
+	                            'Asia Pacific (Singapore)'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'china-login.gs.com' },
+	                            'GH and GSGH'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'swiss-login.gs.com' },
+	                            'GS Bank Zurich'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { type: 'submit', className: 'space-top btn-lg btn-block login-btn space-bottom-lg btn btn-primary' },
+	                        'Login'
 	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'select',
-	                    { id: 'region', name: 'region', className: 'form-control space-bottom-lg' },
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'americas-login.gs.com', selected: 'selected' },
-	                        'Americas'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'emea-login.gs.com' },
-	                        'Europe, Middle East & Africa'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'apac1-login.gs.com' },
-	                        'Asia Pacific (Hong Kong / Japan)'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'apac2-login.gs.com' },
-	                        'Asia Pacific (Singapore)'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'china-login.gs.com' },
-	                        'GH and GSGH'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: 'swiss-login.gs.com' },
-	                        'GS Bank Zurich'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { type: 'submit', className: 'space-top btn-lg btn-block login-btn space-bottom-lg btn btn-primary' },
-	                    'Login'
 	                )
 	            );
 	        }
@@ -23497,7 +23517,7 @@
 	
 	  _createClass(AppRouter, [{
 	    key: '_ensureLoggedIn',
-	    value: function _ensureLoggedIn() {
+	    value: function _ensureLoggedIn(nextState, replace) {
 	      var currentState = this.props.store.getState();
 	      var currentUser = currentState.session.currentUser;
 	      if (!currentUser) {
@@ -23506,7 +23526,7 @@
 	    }
 	  }, {
 	    key: '_redirectIfLoggedIn',
-	    value: function _redirectIfLoggedIn() {
+	    value: function _redirectIfLoggedIn(nextState, replace) {
 	      var currentState = this.props.store.getState();
 	      var currentUser = currentState.session.currentUser;
 	      if (currentUser) {
@@ -28333,24 +28353,28 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
+	var _session_actions = __webpack_require__(205);
+	
+	var ACTIONS = _interopRequireWildcard(_session_actions);
+	
 	var _home_page = __webpack_require__(262);
 	
 	var _home_page2 = _interopRequireDefault(_home_page);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    items: state.user
 	  };
 	};
-	// import * as ACTIONS from '../../actions/session_actions';
-	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    action: function action(items) {
-	      return dispatch(ACTIONS.action(items));
+	    logout: function logout() {
+	      return dispatch(ACTIONS.logout());
 	    }
 	  };
 	};
@@ -28393,6 +28417,11 @@
 	  }
 	
 	  _createClass(HomePage, [{
+	    key: "handleClick",
+	    value: function handleClick() {
+	      this.props.logout();
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -28402,6 +28431,11 @@
 	          "h1",
 	          null,
 	          "Welcome To the HomePage"
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: this.handleClick.bind(this) },
+	          "Sign Out"
 	        )
 	      );
 	    }
@@ -28497,16 +28531,19 @@
 	      var currentUser = action.currentUser;
 	      // router.push('/feed');
 	      return (0, _merge2.default)({}, _nullUser, { currentUser: currentUser });
+	      break;
 	    case "LOGOUT":
 	      _reactRouter.hashHistory.push('/');
 	      return (0, _merge2.default)({}, _nullUser);
+	      break;
 	    case "RECEIVE_ERRORS":
 	      var errors = action.errors;
 	      return (0, _merge2.default)({}, _nullUser, { errors: errors });
+	      break;
 	
 	    default:
 	      return state;
-	
+	      break;
 	  }
 	};
 	
@@ -32091,14 +32128,15 @@
 	      switch (action.type) {
 	        case "LOGIN":
 	
-	          if (action.user.name === 'Chuck Norris' && action.user.securId === '12345') {
+	          if (action.user.name === 'Chuck Norris' && action.user.securId === '12345' && action.user.time > 5) {
 	            var user = {
 	              name: 'Chuck Norris',
 	              balance: '$100,000,000'
 	            };
 	            dispatch(ACTIONS.receiveCurrentUser(user));
+	            _reactRouter.hashHistory.push('/home');
 	          } else {
-	            dispatch(ACTIONS.receiveErrors('Wrong Credentials!'));
+	            dispatch(ACTIONS.receiveErrors('This form utilizes implicit authentication. Please fill out form correctly and in under 5 seconds'));
 	          }
 	
 	          return next(action);

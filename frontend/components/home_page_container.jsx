@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-// import * as ACTIONS from '../../actions/session_actions';
+import * as ACTIONS from '../actions/session_actions';
 import HomePage from './home_page';
 
 const mapStateToProps = state => ({
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    action: items => dispatch(ACTIONS.action(items)),
+    logout: () => dispatch(ACTIONS.logout())
   }
 };
 

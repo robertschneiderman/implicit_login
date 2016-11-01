@@ -7,10 +7,15 @@ class HomePage extends React.Component {
     super(props);
   }
 
+  handleClick() {
+    this.props.logout();
+  }
+
   render() {
     return(
       <div className="HomePage">
         <h1>Welcome To the HomePage</h1>
+        <button onClick={this.handleClick.bind(this)}>Sign Out</button>
       </div>
     )
   }
