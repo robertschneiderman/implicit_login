@@ -21430,9 +21430,13 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _app = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./app\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _app = __webpack_require__(267);
 	
 	var _app2 = _interopRequireDefault(_app);
+	
+	var _router = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./router\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _router2 = _interopRequireDefault(_router);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21441,7 +21445,7 @@
 	  return React.createElement(
 	    _reactRedux.Provider,
 	    { store: store },
-	    React.createElement(_app2.default, null)
+	    React.createElement(_router2.default, { store: store })
 	  );
 	};
 
@@ -24129,6 +24133,124 @@
 /***/ function(module, exports) {
 
 	"use strict";
+
+/***/ },
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _session_form_container = __webpack_require__(268);
+	
+	var _session_form_container2 = _interopRequireDefault(_session_form_container);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'app' },
+	    _react2.default.createElement(_session_form_container2.default, null)
+	  );
+	};
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _user_actions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../actions/user_actions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var ACTIONS = _interopRequireWildcard(_user_actions);
+	
+	var _ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _2 = _interopRequireDefault(_);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    items: state.user
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    action: function action(items) {
+	      return dispatch(ACTIONS.action(items));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_2.default);
 
 /***/ }
 /******/ ]);
