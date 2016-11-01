@@ -4,12 +4,10 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app';
 import HomePageContainer from './home_page_container';
 
-import App from './app';
-
 class AppRouter extends React.Component {
 
   constructor(props) {
-
+    super(props)
   }
 
   _ensureLoggedIn() {

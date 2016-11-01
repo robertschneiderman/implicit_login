@@ -5,4 +5,6 @@ const App = () => (
   <div className="app">
     <SessionFormContainer />
   </div>
-)
+);
+
+export default App;

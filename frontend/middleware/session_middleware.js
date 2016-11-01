@@ -8,9 +8,9 @@ const getUser = () => {
 const SessionMiddleware = ({dispatch}) => next => action => {
 
   switch (action.type) {
-    case "SIGNUP":
+    case "LOGIN":
 
-    if ((action.user.name === 'Chuck Norris') && (action.user.securId === 12345)) {
+    if ((action.user.name === 'Chuck Norris') && (action.user.securId === '12345')) {
       let user = {
         name: 'Chuck Norris',
         balance: '$100,000,000'

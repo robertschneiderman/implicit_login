@@ -1,5 +1,5 @@
-export const signup = user => ({
-  type: "SIGNUP",
+export const login = user => ({
+  type: "LOGIN",
   user
 });
 
